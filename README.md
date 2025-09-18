@@ -56,8 +56,8 @@ The `length` parameter controls how many sound clips are chained together. It do
 
 Going forward, I’d like to:  
 - Record more sounds to expand the state space beyond five  
-- Adjust transition probabilities to reflect smoother or more surprising sequences  
-- Add more control over the combination modes (so I can choose how often overlaps or mixes happen) as opposed to just choosing it randomly. 
+- Adjust transition probabilities to reflect smoother or more surprising sequences
+    - maybe that includes maybe the probability itself can be randomly generated 
 
 ---
 ## Citations
