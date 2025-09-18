@@ -62,13 +62,11 @@ Going forward, I’d like to:
 ---
 ## Citations
 
-Numpy Documentation – random sampling with probabilities: https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html
-
-SoundFile Documentation – reading and writing WAV files: https://pysoundfile.readthedocs.io/en/latest/
-
-Python Official Documentation – working with arrays and audio data: https://docs.python.org/3/library/array.html
-
-Overlap and mixing logic inspired by audio handling discussions on Stack Overflow (e.g., averaging stereo channels to mono): https://stackoverflow.com/questions/32174978/average-numpy-array-columns
+- Numpy Documentation – random sampling with probabilities: https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html
+- SoundFile Documentation – reading and writing WAV files: https://pysoundfile.readthedocs.io/en/latest/
+- Python Official Documentation – working with arrays and audio data: https://docs.python.org/3/library/array.html
+- Overlap and mixing logic inspired by audio handling discussions on Stack Overflow (e.g., averaging stereo channels to mono): https://stackoverflow.com/questions/32174978/average-numpy-array-columns
+- Markdown & python syntax help: ChatGPT 
 
 Markdown & syntax help: ChatGPT
 ---
