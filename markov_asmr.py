@@ -13,21 +13,43 @@ transition_matrix = {
 
 states = list(transition_matrix.keys())
 
-# helper function to pick next sound based on probabilities
 def next_state(current):
+    """
+    Pick the next sound state based on transition probabilities.
+
+    Args:
+        current (str): the current sound state (e.g., "fire_cackling")
+
+    Returns:
+        str: the next state chosen according to the Markov transition probabilities
+    """
     options = list(transition_matrix[current].keys())
     probs = list(transition_matrix[current].values())
     return np.random.choice(options, p=probs)
 
-# helper: always flatten to mono so arrays line up
 def read_and_flatten(path):
+    """
+    Load an audio file and convert to mono if needed.
+
+    Args:
+        path (str): path to the .wav file
+
+    Returns:
+        tuple: (numpy array of audio samples in mono, sample rate)
+    """
     data, sr = sf.read(path)
-    if data.ndim > 1:       # if stereo, average channels
+    if data.ndim > 1:       # if stereo, average channels → mono
         data = data.mean(axis=1)
     return data, sr
 
-# load wav files from assets folder (hardcoded)
 def load_samples():
+    """
+    Load all ASMR sound samples from the assets folder into memory.
+    Ensures audio is flattened to mono for consistency.
+
+    Returns:
+        dict: mapping of sound state → (audio samples, sample rate)
+    """
     samples = {}
     samples["candy_unwrapping"] = read_and_flatten("assets/candy_unwrapping.wav")
     samples["fire_cackling"]    = read_and_flatten("assets/fire_cackling.wav")
@@ -36,8 +58,17 @@ def load_samples():
     samples["splashing_water"]  = read_and_flatten("assets/splashing_water.wav")
     return samples
 
-# stitch the sequence together into one track
 def generate_asmr(length=20, start="candy_unwrapping"):
+    """
+    Generate an ASMR audio track using a Markov chain to sequence sounds.
+
+    Args:
+        length (int): number of sound clips to include in the sequence
+        start (str): the starting sound state
+
+    Side effects:
+        Writes an output file 'asmr_output.wav' to the working directory.
+    """
     samples = load_samples()
     current = start
     sr = samples[current][1]  
@@ -52,6 +83,5 @@ def generate_asmr(length=20, start="candy_unwrapping"):
     sf.write("asmr_output.wav", full_track, sr)
     print("done! saved to asmr_output.wav")
 
-# run it
 if __name__ == "__main__":
     generate_asmr(length=30, start="fire_cackling")
