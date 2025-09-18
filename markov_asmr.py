@@ -2,8 +2,7 @@ import numpy as np
 import soundfile as sf
 import random
 
-# ok so first, define the transition probabilities
-# basically telling the chain how likely it is to hop from one sound to another
+# transition probabilities (how the chain hops from one sound to another)
 transition_matrix = {
     "candy_unwrapping": {"candy_unwrapping": 0.3, "fire_cackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.1},
     "fire_cackling": {"candy_unwrapping": 0.2, "fire_cackling": 0.4, "keyboard_typing": 0.1, "running_water": 0.2, "splashing_water": 0.1},
@@ -14,22 +13,30 @@ transition_matrix = {
 
 states = list(transition_matrix.keys())
 
-# helper function to pick next sound based on probability
+# helper function to pick next sound based on probabilities
 def next_state(current):
     options = list(transition_matrix[current].keys())
     probs = list(transition_matrix[current].values())
     return np.random.choice(options, p=probs)
 
-# load up all your mp3 files 
+# helper: always flatten to mono so arrays line up
+def read_and_flatten(path):
+    data, sr = sf.read(path)
+    if data.ndim > 1:       # if stereo, average channels
+        data = data.mean(axis=1)
+    return data, sr
+
+# load wav files from assets folder (hardcoded)
 def load_samples():
     samples = {}
-    for s in states:
-        filename = f"assets/{s}.mp3"  
-        data, sr = sf.read(filename)
-        samples[s] = (data, sr)
+    samples["candy_unwrapping"] = read_and_flatten("assets/candy_unwrapping.wav")
+    samples["fire_cackling"]    = read_and_flatten("assets/fire_cackling.wav")
+    samples["keyboard_typing"]  = read_and_flatten("assets/keyboard_typing.wav")
+    samples["running_water"]    = read_and_flatten("assets/running_water.wav")
+    samples["splashing_water"]  = read_and_flatten("assets/splashing_water.wav")
     return samples
 
-# generate the final audio track
+# stitch the sequence together into one track
 def generate_asmr(length=20, start="candy_unwrapping"):
     samples = load_samples()
     current = start
@@ -39,14 +46,12 @@ def generate_asmr(length=20, start="candy_unwrapping"):
     for _ in range(length):
         data, _ = samples[current]
         track.append(data)
-        # move to the next sound
-        current = next_state(current)  
+        current = next_state(current)  # move chain forward
 
-    # smush them all into one big audio file
     full_track = np.concatenate(track)
     sf.write("asmr_output.wav", full_track, sr)
     print("done! saved to asmr_output.wav")
 
-# run the main thing!
+# run it
 if __name__ == "__main__":
     generate_asmr(length=30, start="fire_cackling")
