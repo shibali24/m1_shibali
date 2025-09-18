@@ -68,7 +68,6 @@ Going forward, I’d like to:
 - Overlap and mixing logic inspired by audio handling discussions on Stack Overflow (e.g., averaging stereo channels to mono): https://stackoverflow.com/questions/32174978/average-numpy-array-columns
 - Markdown & python syntax help: ChatGPT 
 
-Markdown & syntax help: ChatGPT
 ---
 
 ## Running the program
