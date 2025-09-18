@@ -2,7 +2,7 @@ import numpy as np
 import soundfile as sf
 import random
 
-# transition probabilities (how the chain hops from one sound to another)
+# transition probabilities dictionary of dictionary (how the chain hops from one sound to another)
 transition_matrix = {
     "candy_unwrapping": {"candy_unwrapping": 0.3, "fire_cackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.1},
     "fire_cackling": {"candy_unwrapping": 0.2, "fire_cackling": 0.4, "keyboard_typing": 0.1, "running_water": 0.2, "splashing_water": 0.1},
@@ -25,6 +25,7 @@ def next_state(current):
     """
     options = list(transition_matrix[current].keys())
     probs = list(transition_matrix[current].values())
+    # choose a random state to transition to based on the numerical values 
     return np.random.choice(options, p=probs)
 
 def read_and_flatten(path):
@@ -38,7 +39,8 @@ def read_and_flatten(path):
         tuple: (numpy array of audio samples in mono, sample rate)
     """
     data, sr = sf.read(path)
-    if data.ndim > 1:       # if stereo, average channels → mono
+    # if stereo, average channels → mono (did not work otherwise)
+    if data.ndim > 1:       
         data = data.mean(axis=1)
     return data, sr
 
@@ -48,7 +50,7 @@ def load_samples():
     Ensures audio is flattened to mono for consistency.
 
     Returns:
-        dict: mapping of sound state → (audio samples, sample rate)
+        dict: mapping of sound state 
     """
     samples = {}
     samples["candy_unwrapping"] = read_and_flatten("assets/candy_unwrapping.wav")
