@@ -50,6 +50,12 @@ Going forward, I’d like to:
 
 ---
 
+### How this project challenged me 
+
+I had never worked with raw audio data before so getting all the sound files to load properly turned out to be harder than I expected. Some of my clips were stereo while others were mono, and the arrays would not line up until I figured out how to flatten everything to mono with NumPy. I also ran into issues with missing libraries and path errors, which forced me to debug carefully and really understand how Python packages handle media files. More broadly, I had to think about Markov chains in a new way — not just as a math concept, but as a tool to drive creative sequencing of sounds. 
+
+---
+
 ## Citations
 
 - Numpy Documentation – random sampling with probabilities: https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html  
