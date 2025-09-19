@@ -21,7 +21,7 @@ These are the sound “states” the system can be in. At each step, one of thes
 | State             | Example sound it represents |
 |-------------------|-----------------------------|
 | candy_unwrapping  | crinkle of a wrapper        |
-| fire_cackling     | soft fireplace crackles     |
+| fire_crackling    | soft fireplace crackles     |
 | keyboard_typing   | keyboard ASMR               |
 | running_water     | flowing water in the river  |
 | splashing_water   | water splashes in bucket    |
@@ -30,7 +30,7 @@ These are the sound “states” the system can be in. At each step, one of thes
 
 ## How the chain works
 
-The system keeps track of how likely it is to move from one state to another. For example, if it is currently in `fire_cackling`, there might be a 40% chance it stays there, a 20% chance it moves to `running_water`, and smaller chances for the other sounds. These probabilities are all written into the transition matrix at the top of the code.
+The system keeps track of how likely it is to move from one state to another. For example, if it is currently in `fire_crackling`, there might be a 40% chance it stays there, a 20% chance it moves to `running_water`, and smaller chances for the other sounds. These probabilities are all written into the transition matrix at the top of the code.
 
 ---
 
