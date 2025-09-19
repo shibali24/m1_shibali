@@ -4,11 +4,11 @@ import random
 
 # transition probabilities dictionary of dictionary (how the chain hops from one sound to another)
 transition_matrix = {
-    "candy_unwrapping": {"candy_unwrapping": 0.3, "fire_cackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.1},
-    "fire_cackling": {"candy_unwrapping": 0.2, "fire_cackling": 0.4, "keyboard_typing": 0.1, "running_water": 0.2, "splashing_water": 0.1},
-    "keyboard_typing": {"candy_unwrapping": 0.2, "fire_cackling": 0.1, "keyboard_typing": 0.4, "running_water": 0.2, "splashing_water": 0.1},
-    "running_water": {"candy_unwrapping": 0.1, "fire_cackling": 0.2, "keyboard_typing": 0.1, "running_water": 0.4, "splashing_water": 0.2},
-    "splashing_water": {"candy_unwrapping": 0.1, "fire_cackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.3},
+    "candy_unwrapping": {"candy_unwrapping": 0.3, "fire_crackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.1},
+    "fire_crackling": {"candy_unwrapping": 0.2, "fire_crackling": 0.4, "keyboard_typing": 0.1, "running_water": 0.2, "splashing_water": 0.1},
+    "keyboard_typing": {"candy_unwrapping": 0.2, "fire_crackling": 0.1, "keyboard_typing": 0.4, "running_water": 0.2, "splashing_water": 0.1},
+    "running_water": {"candy_unwrapping": 0.1, "fire_crackling": 0.2, "keyboard_typing": 0.1, "running_water": 0.4, "splashing_water": 0.2},
+    "splashing_water": {"candy_unwrapping": 0.1, "fire_crackling": 0.2, "keyboard_typing": 0.2, "running_water": 0.2, "splashing_water": 0.3},
 }
 
 states = list(transition_matrix.keys())
@@ -18,7 +18,7 @@ def next_state(current):
     Pick the next sound state based on transition probabilities.
 
     Args:
-        current (str): the current sound state (e.g., "fire_cackling")
+        current (str): the current sound state (e.g., "fire_crackling")
 
     Returns:
         str: the next state chosen according to the Markov transition probabilities
@@ -54,7 +54,7 @@ def load_samples():
     """
     samples = {}
     samples["candy_unwrapping"] = read_and_flatten("assets/candy_unwrapping.wav")
-    samples["fire_cackling"]    = read_and_flatten("assets/fire_cackling.wav")
+    samples["fire_crackling"]    = read_and_flatten("assets/fire_crackling.wav")
     samples["keyboard_typing"]  = read_and_flatten("assets/keyboard_typing.wav")
     samples["running_water"]    = read_and_flatten("assets/running_water.wav")
     samples["splashing_water"]  = read_and_flatten("assets/splashing_water.wav")
@@ -86,4 +86,4 @@ def generate_asmr(length=20, start="candy_unwrapping"):
     print("done! saved to asmr_output.wav")
 
 if __name__ == "__main__":
-    generate_asmr(length=30, start="fire_cackling")
+    generate_asmr(length=30, start="fire_crackling")
